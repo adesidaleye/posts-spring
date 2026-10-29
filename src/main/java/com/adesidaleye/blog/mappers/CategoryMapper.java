@@ -1,6 +1,7 @@
 package com.adesidaleye.blog.mappers;
 
 import com.adesidaleye.blog.domain.dtos.CategoryDto;
+import com.adesidaleye.blog.domain.dtos.CreateCategoryRequest;
 import com.adesidaleye.blog.domain.entities.Category;
 import com.adesidaleye.blog.domain.entities.Post;
 import com.adesidaleye.blog.domain.enums.PostStatus;
@@ -16,6 +17,8 @@ public interface CategoryMapper {
 
     @Mapping(target = "postCount", source = "posts", qualifiedByName = "calculatePostCount")
     CategoryDto toDto(Category category);
+
+    Category toEntity(CreateCategoryRequest createCategoryRequest);
 
     @Named("calculatePostCount")
     default long calculatePostCount(List<Post> posts) {
