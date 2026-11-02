@@ -3,9 +3,9 @@ package com.adesidaleye.blog.services.impl;
 import com.adesidaleye.blog.domain.entities.Category;
 import com.adesidaleye.blog.repositories.CategoryRepository;
 import com.adesidaleye.blog.services.CategoryService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

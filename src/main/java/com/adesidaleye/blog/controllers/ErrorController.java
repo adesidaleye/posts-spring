@@ -1,6 +1,7 @@
 package com.adesidaleye.blog.controllers;
 
 import com.adesidaleye.blog.domain.dtos.ApiErrorResponse;
+import com.adesidaleye.blog.exceptions.EmailAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +58,17 @@ public class ErrorController {
                 .build();
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(error);
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ApiErrorResponse> handleEmailAlreadyExistsException(EmailAlreadyExistsException e) {
+        ApiErrorResponse error = ApiErrorResponse.builder()
+                .status(HttpStatus.CONFLICT.value())
+                .message("Email is already registered")
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(error);
     }
 }
