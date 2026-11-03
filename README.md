@@ -13,7 +13,7 @@ A blog REST API built with Spring Boot, showing stateless authentication with **
 
 ## Tech Stack
 
-Java 21 · Spring Boot · Spring Security · Spring Data JPA · PostgreSQL · JJWT · MapStruct · Lombok · Maven
+Java 21 · Spring Boot · Spring Security · Spring Data JPA · PostgreSQL · JWT · MapStruct · Lombok · Maven
 
 ## Getting Started
 
