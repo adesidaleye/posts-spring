@@ -1,7 +1,7 @@
 package com.adesidaleye.blog.controllers;
 
 import com.adesidaleye.blog.domain.dtos.CreateTagRequest;
-import com.adesidaleye.blog.domain.dtos.TagResponse;
+import com.adesidaleye.blog.domain.dtos.TagDto;
 import com.adesidaleye.blog.domain.entities.Tag;
 import com.adesidaleye.blog.mappers.TagMapper;
 import com.adesidaleye.blog.services.TagService;
@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,10 @@ public class TagController {
     private final TagMapper tagMapper;
 
     @GetMapping
-    public ResponseEntity<List<TagResponse>> getAllTags() {
+    public ResponseEntity<List<TagDto>> getAllTags() {
         List<Tag> tags = tagService.getTags();
 
-        List<TagResponse> tagResponses = tags.stream()
+        List<TagDto> tagResponses = tags.stream()
                 .map(tagMapper::toDto)
                 .toList();
 
@@ -35,9 +34,9 @@ public class TagController {
     }
 
     @PostMapping
-    public ResponseEntity<List<TagResponse>> createTags(@Valid @RequestBody CreateTagRequest createTagRequest) {
+    public ResponseEntity<List<TagDto>> createTags(@Valid @RequestBody CreateTagRequest createTagRequest) {
         List<Tag> savedTags = tagService.createTags(createTagRequest.getNames());
-        List<TagResponse> createdTagResponses = savedTags.stream()
+        List<TagDto> createdTagResponses = savedTags.stream()
                 .map(tagMapper::toDto)
                 .toList();
 

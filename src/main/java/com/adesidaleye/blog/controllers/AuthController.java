@@ -31,7 +31,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> register(
             @Valid @RequestBody RegisterRequest request
     ) {
-        userService.register(request);
+        userService.registerUser(request);
 
         // auto-login after signup
         UserDetails userDetails = authenticationService.authenticate(

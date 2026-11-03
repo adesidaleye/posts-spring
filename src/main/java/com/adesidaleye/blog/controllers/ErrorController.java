@@ -2,6 +2,7 @@ package com.adesidaleye.blog.controllers;
 
 import com.adesidaleye.blog.domain.dtos.ApiErrorResponse;
 import com.adesidaleye.blog.exceptions.EmailAlreadyExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -94,6 +95,17 @@ public class ErrorController {
                 .build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(error);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleEntityNotFoundException(EntityNotFoundException ex) {
+        ApiErrorResponse error = ApiErrorResponse.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .message(ex.getMessage())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(error);
     }
 }
